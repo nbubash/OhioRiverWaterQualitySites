@@ -1,6 +1,9 @@
 import { MapContainer, TileLayer, Marker, GeoJSON, Popup } from "react-leaflet";
 import React, { Component } from 'react';
 import "./styles.css";
+import surveyPoints from 'data/Feb18SiteData.json';
+import river from 'data/ohioriver.json';
+import train from 'data/eastpalestinetrainderailment.json';
 
 export default class Map extends Component {
 
@@ -8,7 +11,9 @@ export default class Map extends Component {
     super(props);
     this.state = {}
 }
+  
   render() {
+    console.log('SP',surveyPoints);
     const {data} = this.props;
     return (
       <div className="map">
@@ -17,7 +22,7 @@ export default class Map extends Component {
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://stamen-tiles.a.ssl.fastly.net/terrain/{z}/{x}/{y}.jpg"
           />
-          {data.map((item, index) => (
+          {/* {data.map((item, index) => (
               <Marker key={index} position={[item.ITD_Y, item.ITD_X]}>
                 <Popup>
                   OID: {item.OID_}<br/>
@@ -25,8 +30,10 @@ export default class Map extends Component {
                   Office: {item.Office}
                 </Popup>
               </Marker>
-          ))}
-          <GeoJSON data={[]} />
+          ))} */}
+          <GeoJSON data={surveyPoints} />
+          <GeoJSON data={river} />
+          <GeoJSON data={train} />
         </MapContainer>
       </div>
     );
